@@ -2,7 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 buildscript {
    repositories {
-      jcenter()
       mavenCentral()
       maven {
          url = uri("https://oss.sonatype.org/content/repositories/snapshots/")

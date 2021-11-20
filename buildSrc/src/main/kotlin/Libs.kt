@@ -3,10 +3,6 @@ object Libs {
    const val kotlinVersion = "1.4.31"
    const val org = "io.kotest.extensions"
 
-   object Kotlin {
-      const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-   }
-
    object Kotest {
       private const val version = "4.6.3"
       const val AssertionsShared = "io.kotest:kotest-assertions-shared:$version"
