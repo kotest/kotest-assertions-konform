@@ -16,26 +16,47 @@ buildscript {
 plugins {
    java
    `java-library`
-   id("java-library")
-   id("maven-publish")
    signing
-   maven
    `maven-publish`
-   kotlin("jvm").version(Libs.kotlinVersion)
+   kotlin("multiplatform").version(Libs.kotlinVersion)
+}
+
+kotlin {
+   targets {
+      jvm {
+         compilations.all {
+            kotlinOptions {
+               jvmTarget = "1.8"
+            }
+         }
+      }
+      js {
+         browser()
+         nodejs()
+      }
+   }
+
+   sourceSets {
+      val commonMain by getting {
+         dependencies {
+            implementation(Libs.Kotest.AssertionsShared)
+            implementation(Libs.Konform.Konform)
+         }
+      }
+      val jvmTest by getting {
+         dependencies {
+            implementation(Libs.Kotest.junit5)
+            implementation(Libs.Kotest.AssertionsCore)
+            implementation("io.kotest:kotest-runner-junit5-jvm:4.6.3")
+         }
+      }
+   }
 }
 
 allprojects {
-   apply(plugin = "org.jetbrains.kotlin.jvm")
 
    group = Libs.org
    version = Ci.version
-
-   dependencies {
-      implementation(Libs.Kotest.AssertionsShared)
-      implementation(Libs.Konform.Konform)
-      testImplementation(Libs.Kotest.junit5)
-      testImplementation(Libs.Kotest.AssertionsCore)
-   }
 
    tasks.named<Test>("test") {
       useJUnitPlatform()
