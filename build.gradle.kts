@@ -21,6 +21,17 @@ plugins {
    kotlin("multiplatform").version(Libs.kotlinVersion)
 }
 
+repositories {
+   mavenLocal()
+   mavenCentral()
+   maven {
+      url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+   }
+}
+
+group = Libs.org
+version = Ci.version
+
 kotlin {
    targets {
       jvm {
@@ -39,44 +50,26 @@ kotlin {
    sourceSets {
       val commonMain by getting {
          dependencies {
+            implementation(Libs.Kotest.AssertionsCore)
             implementation(Libs.Kotest.AssertionsShared)
             implementation(Libs.Konform.Konform)
          }
       }
       val jvmTest by getting {
          dependencies {
+            implementation(Libs.Kotest.api)
             implementation(Libs.Kotest.junit5)
-            implementation(Libs.Kotest.AssertionsCore)
-            implementation("io.kotest:kotest-runner-junit5-jvm:4.6.3")
          }
       }
    }
 }
 
-allprojects {
-
-   group = Libs.org
-   version = Ci.version
-
-   tasks.named<Test>("test") {
-      useJUnitPlatform()
-      testLogging {
-         showExceptions = true
-         showStandardStreams = true
-         exceptionFormat = TestExceptionFormat.FULL
-      }
-   }
-
-   tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-      kotlinOptions.jvmTarget = "1.8"
-   }
-
-   repositories {
-      mavenLocal()
-      mavenCentral()
-      maven {
-         url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-      }
+tasks.named<Test>("jvmTest") {
+   useJUnitPlatform()
+   testLogging {
+      showExceptions = true
+      showStandardStreams = true
+      exceptionFormat = TestExceptionFormat.FULL
    }
 }
 

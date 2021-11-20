@@ -8,9 +8,10 @@ object Libs {
    }
 
    object Kotest {
-      private const val version = "4.4.3"
+      private const val version = "4.6.3"
       const val AssertionsShared = "io.kotest:kotest-assertions-shared:$version"
       const val AssertionsCore = "io.kotest:kotest-assertions-core:$version"
+      const val api = "io.kotest:kotest-framework-api:$version"
       const val junit5 = "io.kotest:kotest-runner-junit5-jvm:$version"
    }
 
