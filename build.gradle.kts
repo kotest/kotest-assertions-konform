@@ -41,7 +41,7 @@ kotlin {
             }
          }
       }
-      js {
+      js(BOTH) {
          browser()
          nodejs()
       }
