@@ -15,6 +15,11 @@ Please create issues on the main kotest [board](https://github.com/kotest/kotest
 
 ## Changelog
 
+
+#### 1.0.1
+
+* Build for IR JS
+
 #### 1.0.0
 
 * Migrated to top level repo.
