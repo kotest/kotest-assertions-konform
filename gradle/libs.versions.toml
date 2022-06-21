@@ -1,0 +1,11 @@
+[versions]
+konform = "0.3.0"
+kotest = "4.6.3"
+
+[libraries]
+konform = { module = "io.konform:konform", version.ref = "konform" }
+
+kotest-assertions-shared = { module = "io.kotest:kotest-assertions-shared", version.ref = "kotest" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-framework-api = { module = "io.kotest:kotest-framework-api", version.ref = "kotest" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }

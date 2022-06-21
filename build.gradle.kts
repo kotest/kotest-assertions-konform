@@ -17,8 +17,7 @@ plugins {
    `java-library`
    signing
    `maven-publish`
-   kotlin("multiplatform").version(Libs.kotlinVersion)
-   id("org.jetbrains.dokka") version "1.6.21"
+   kotlin("multiplatform") version "1.4.31"
 }
 
 repositories {
@@ -29,7 +28,7 @@ repositories {
    }
 }
 
-group = Libs.org
+group = "io.kotest.extensions"
 version = Ci.version
 
 kotlin {
@@ -50,15 +49,15 @@ kotlin {
    sourceSets {
       val commonMain by getting {
          dependencies {
-            implementation(Libs.Kotest.AssertionsCore)
-            implementation(Libs.Kotest.AssertionsShared)
-            implementation(Libs.Konform.Konform)
+            implementation(libs.kotest.assertions.shared)
+            implementation(libs.kotest.assertions.core)
+            implementation(libs.konform)
          }
       }
       val jvmTest by getting {
          dependencies {
-            implementation(Libs.Kotest.api)
-            implementation(Libs.Kotest.junit5)
+            implementation(libs.kotest.framework.api)
+            implementation(libs.kotest.runner.junit5)
          }
       }
    }
