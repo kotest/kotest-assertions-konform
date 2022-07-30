@@ -1,5 +1,5 @@
 [versions]
-konform = "0.3.0"
+konform = "0.4.0"
 kotest = "5.4.1"
 
 [libraries]
