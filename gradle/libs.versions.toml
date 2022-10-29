@@ -1,6 +1,6 @@
 [versions]
 konform = "0.4.0"
-kotest = "5.5.1"
+kotest = "5.5.3"
 
 [libraries]
 konform = { module = "io.konform:konform", version.ref = "konform" }
