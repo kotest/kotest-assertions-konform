@@ -40,7 +40,15 @@ inline fun <T> Validation<T>.shouldBeInvalid(value: T, fn: (Invalid<T>) -> Unit)
 
 fun Invalid<*>.shouldContainError(field: Any, error: String) {
    val list = this[field]
-   list?.let {
+   list.let {
+      it.shouldNotBeNull()
+      it shouldContain error
+   }
+}
+
+fun Invalid<*>.shouldContainError(propertyPaths: Collection<Any>, error: String) {
+   val list = this.get(*propertyPaths.toTypedArray())
+   list.let {
       it.shouldNotBeNull()
       it shouldContain error
    }
