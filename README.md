@@ -15,6 +15,10 @@ Please create issues on the main kotest [board](https://github.com/kotest/kotest
 
 ## Changelog
 
+#### 1.0.2
+
+* Fix to shouldContainError()
+* Support deep property checks
 
 #### 1.0.1
 
