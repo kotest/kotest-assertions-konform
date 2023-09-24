@@ -15,6 +15,10 @@ Please create issues on the main kotest [board](https://github.com/kotest/kotest
 
 ## Changelog
 
+#### 1.1.0
+
+* Compatible with Kotest 5.7 and Kotlin 1.8
+
 #### 1.0.2
 
 * Fix to shouldContainError()
