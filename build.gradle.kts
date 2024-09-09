@@ -1,4 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 buildscript {
    repositories {
@@ -17,7 +19,8 @@ plugins {
    `java-library`
    signing
    `maven-publish`
-   kotlin("multiplatform") version "1.8.21"
+   alias(libs.plugins.kotlin.multiplatform)
+   alias(libs.plugins.kotest.multiplatform)
 }
 
 repositories {
@@ -32,31 +35,42 @@ group = "io.kotest.extensions"
 version = Ci.version
 
 kotlin {
-   targets {
-      jvm {
-         compilations.all {
-            kotlinOptions {
-               jvmTarget = "1.8"
-            }
-         }
+
+   sourceSets.all {
+      languageSettings {
+         apiVersion = libs.versions.kotlinApiTarget.get()
+         languageVersion = libs.versions.kotlinApiTarget.get()
       }
-      js(IR) {
-         browser()
-         nodejs()
+   }
+   jvmToolchain {
+      languageVersion.set(JavaLanguageVersion.of(libs.versions.gradleDaemonJvm.get()))
+   }
+
+   jvm {
+      @OptIn(ExperimentalKotlinGradlePluginApi::class)
+      compilerOptions {
+         jvmTarget.set(JvmTarget.fromTarget(libs.versions.jvmMinTarget.get()))
       }
+   }
+   js(IR) {
+      browser()
+      nodejs()
    }
 
    sourceSets {
       val commonMain by getting {
          dependencies {
-            implementation(libs.kotest.assertions.shared)
             implementation(libs.kotest.assertions.core)
             implementation(libs.konform)
          }
       }
-      val jvmTest by getting {
+      val commonTest by getting {
          dependencies {
             implementation(libs.kotest.framework.engine)
+         }
+      }
+      val jvmTest by getting {
+         dependencies {
             implementation(libs.kotest.runner.junit5)
          }
       }
