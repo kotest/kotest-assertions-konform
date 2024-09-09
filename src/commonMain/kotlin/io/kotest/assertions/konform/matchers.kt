@@ -15,8 +15,8 @@ fun <A> beValid(a: A) = object : Matcher<Validation<A>> {
    override fun test(value: Validation<A>): MatcherResult = value(a).let {
       MatcherResult(
          it is Valid,
-         "$a should be valid, but was: $it",
-         "$a should not be valid"
+         { "$a should be valid, but was: $it" },
+         { "$a should not be valid" }
       )
    }
 }
@@ -27,18 +27,18 @@ fun <A> beInvalid(a: A) = object : Matcher<Validation<A>> {
    override fun test(value: Validation<A>): MatcherResult = value(a).let {
       MatcherResult(
          it is Invalid,
-         "$a should be invalid",
-         "$a should not be invalid, but was: $it"
+         { "$a should be invalid" },
+         { "$a should not be invalid, but was: $it" }
       )
    }
 }
 
-inline fun <T> Validation<T>.shouldBeInvalid(value: T, fn: (Invalid<T>) -> Unit) {
+inline fun <T> Validation<T>.shouldBeInvalid(value: T, fn: (Invalid) -> Unit) {
    this.shouldBeInvalid(value)
-   fn(this(value) as Invalid<T>)
+   fn(this(value) as Invalid)
 }
 
-fun Invalid<*>.shouldContainError(field: Any, error: String) {
+fun Invalid.shouldContainError(field: Any, error: String) {
    val list = this[field]
    list.let {
       it.shouldNotBeNull()
@@ -46,7 +46,7 @@ fun Invalid<*>.shouldContainError(field: Any, error: String) {
    }
 }
 
-fun Invalid<*>.shouldContainError(propertyPaths: Collection<Any>, error: String) {
+fun Invalid.shouldContainError(propertyPaths: Collection<Any>, error: String) {
    val list = this.get(*propertyPaths.toTypedArray())
    list.let {
       it.shouldNotBeNull()

@@ -15,6 +15,11 @@ Please create issues on the main kotest [board](https://github.com/kotest/kotest
 
 ## Changelog
 
+#### 1.2.0
+
+* Updated to Konform 0.6.2
+* Fixed compatibility with Konform 0.5.0+
+
 #### 1.1.0
 
 * Compatible with Kotest 5.7 and Kotlin 1.8
