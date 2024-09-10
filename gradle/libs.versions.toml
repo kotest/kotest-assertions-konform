@@ -1,11 +1,20 @@
 [versions]
-konform = "0.4.0"
-kotest = "5.7.2"
+konform = "0.6.2"
+kotest = "5.9.1"
+kotlin = "2.0.20"
+# Targets of kotest 5.9
+kotlinApiTarget = "1.9"
+jvmMinTarget = "1.8"
+gradleDaemonJvm = "21"
+
 
 [libraries]
 konform = { module = "io.konform:konform", version.ref = "konform" }
 
-kotest-assertions-shared = { module = "io.kotest:kotest-assertions-shared", version.ref = "kotest" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotest-multiplatform = { id = "io.kotest.multiplatform", version.ref = "kotest" }
