@@ -1,6 +1,6 @@
 [versions]
 konform = "0.6.2"
-kotest = "5.9.1"
+kotest = "6.0.0-LOCAL"
 kotlin = "2.0.20"
 # Targets of kotest 5.9
 kotlinApiTarget = "1.9"
