@@ -1,5 +1,5 @@
 [versions]
-konform = "0.6.2"
+konform = "0.10.0"
 kotest = "5.9.1"
 kotlin = "2.0.20"
 # Targets of kotest 5.9
