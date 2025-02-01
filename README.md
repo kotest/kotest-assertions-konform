@@ -1,5 +1,7 @@
 # kotest-assertions-konform
 
+**Migrated to main kotest repo**
+
 Kotest extension for [Konform](https://github.com/konform-kt/konform).
 
 See [docs](https://kotest.io/docs/assertions/konform-matchers.html).
